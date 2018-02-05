@@ -4,7 +4,8 @@
     - [ ] 伯德小姐
     - [ ] 水形物语_The Shape of Water
     - [ ] 魅影缝匠
-    - [x] 2018/01/28| The Post| UA HK
+    - [ ] 海边的曼彻斯特
+    - [x] 2018/01/28| The Post| UA HK
     - [x] 2018/01/26| 逃出绝命镇
     - [x] 2018/01/25| 三个广告牌_Three Billboard Outside Ebbing, Missouri
     - [x] 太空救援
