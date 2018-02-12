@@ -14,10 +14,10 @@
     - [x] 2018/02/07| 伯德小姐_Lady Bird
     - [x] 2018/02/06| 水形物语_The Shape of Water
     - [x] 2018/01/28| 华盛顿邮报_The Post| UA HK
-    - [x] 2018/01/26| 逃出绝命镇
+    - [x] 2018/01/26| 逃出绝命镇_Get Out
     - [x] 2018/01/25| 三个广告牌_Three Billboard Outside Ebbing, Missouri
-    - [x] 敦刻尔克
-    - [x] 至暗时刻| 广州天汇
+    - [x] 敦刻尔克_Dunkirk
+    - [x] 至暗时刻_Darkest Hour| 广州天汇
     - [x] 请以你的名字呼唤我_Call Me by Your Name
 
 ### 2017
