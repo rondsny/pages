@@ -10,7 +10,7 @@
     - [x] 寻梦环游记
 
 - 2018奥斯卡最佳影片提名
-    - [ ] 魅影缝匠
+    - [ ] 魅影缝匠_Phantom Thread
     - [x] 2018/02/07| 伯德小姐_Lady Bird
     - [x] 2018/02/06| 水形物语_The Shape of Water
     - [x] 2018/01/28| 华盛顿邮报_The Post| UA HK
