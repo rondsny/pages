@@ -34,7 +34,9 @@
 - [x] ****_| 2018/03/02| 三个广告牌_Three Billboard Outside Ebbing, Missouri
 - [x] ****_| 敦刻尔克_Dunkirk
 - [x] *****| 至暗时刻_Darkest Hour| 广州天汇
-- [x] ***__| 请以你的名字呼唤我_Call Me by Your Name
+- [x] ***__| 请以你的名字呼唤我_Call Me by Your Nam
+
+[2018奥斯卡](./2018/Oscar.md)
 
 #### 2018奥斯卡最佳纪录长片提名
 
