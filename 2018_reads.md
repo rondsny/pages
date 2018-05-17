@@ -11,7 +11,7 @@
 - [ ] _____| 海边的曼彻斯特
 - [ ] _____| 天才少女
 - [ ] _____| 马戏之王_The Greatest Showman
-- [*] ****_| 2018/05/11| 复仇者联盟3：无限战争_Avengers: Infinity War
+- [x] ****_| 2018/05/11| 复仇者联盟3：无限战争_Avengers: Infinity War
 - [x] **___| 2018/03/26| 环太平洋：雷霆再起_Pacific Rim: Uprising
 - [x] ***__| 2018/02/28| 神秘巨星_Secret Superstar
 - [x] **___| 2018/02/22| 城市之光
