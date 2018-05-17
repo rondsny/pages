@@ -12,9 +12,11 @@
 - [ ] _____| 天才少女
 - [ ] _____| 马戏之王_The Greatest Showman
 - [x] ****_| 2018/05/11| 复仇者联盟3：无限战争_Avengers: Infinity War
-- [x] ****_| 2018/04/00| 头号玩家_Ready Player One
-- [x] **___| 2018/03/26| 环太平洋：雷霆再起_Pacific Rim: Uprising
-- [x] **___| 2018/03/00| 黑豹_Black Panther
+- [x] ****_| 2018/03/31| 头号玩家_Ready Player One
+- [x] *****| 2018/03/28| 水形物语_The Shape of Water
+- [x] **___| 2018/03/23| 环太平洋：雷霆再起_Pacific Rim: Uprising
+- [x] **___| 2018/03/09| 黑豹_Black Panther
+- [x] ****_| 2018/03/02| 三个广告牌_Three Billboard Outside Ebbing, Missouri
 - [x] ***__| 2018/02/28| 神秘巨星_Secret Superstar
 - [x] **___| 2018/02/22| 城市之光
 - [x] ***__| 2018/02/21| 长发公主
