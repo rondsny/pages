@@ -11,6 +11,8 @@
 - [ ] _____| 海边的曼彻斯特
 - [ ] _____| 天才少女
 - [ ] _____| 马戏之王_The Greatest Showman
+- [x] **___| 2018/06/23| 侏罗纪世界2_Jurassic World: Fallen Kingdom |Q
+- [x] **___| 2018/06/17| 金刚：骷髅岛_Kong: Skull Island |H
 - [x] ***__| 2018/06/16| 古墓丽影：起源之战_Tomb Raider |H
 - [x] ****_| 2018/05/11| 复仇者联盟3：无限战争_Avengers: Infinity War
 - [x] ****_| 2018/03/31| 头号玩家_Ready Player One
