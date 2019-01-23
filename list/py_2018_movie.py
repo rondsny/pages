@@ -2,13 +2,13 @@
 
 import io
 import sys
-import MySQLdb
+# import MySQLdb
 from selenium import webdriver
 
 browser = webdriver.Chrome()
 
-# 打开数据库连接
-db = MySQLdb.connect("localhost", "root", "123456", "mov", charset='utf8' )
+# # 打开数据库连接
+# db = MySQLdb.connect("localhost", "root", "123456", "mov", charset='utf8' )
 
 """
 CREATE TABLE db_movies
@@ -36,7 +36,9 @@ CREATE TABLE db_movies
 # info
 # https://movie.douban.com/subject/26611804/
 
-def subject(dbId):
+def subject(dbId, list):
+
+    dict = {}
 
     name = ''
     en_name = ''
@@ -51,6 +53,7 @@ def subject(dbId):
     other_name = '' ##
     imdb = '' ##
     tags = ''
+    l_tags = []
 
     # https://movie.douban.com/subject/30140571/
     id = dbId
@@ -69,13 +72,12 @@ def subject(dbId):
         print(ele.text)
 
     # 主演
-    print(u'\n\n主演:')
+    print(u'\n主演:')
     elem = browser.find_elements_by_xpath('//*[@id="info"]/span[3]/span[2]/span[*]/a')
     for ele in elem:
         if ele.text:
             actor = actor + ele.text + " / "
-            print((ele.text).encode("GBK", 'ignore'))
-
+            
     # 其它
     infos = browser.find_element_by_xpath('//*[@id="info"]')
     lines = infos.text.split('\n')
@@ -107,8 +109,12 @@ def subject(dbId):
             imdb = cont
 
     ele = browser.find_element_by_xpath('//*[@id="interest_sectl"]/div[1]/div[2]/strong')
-    score = ele.text
+    score = int(ele.text)
     print(u"分数=%s" % score)
+    
+    ele = browser.find_element_by_xpath('//*[@id="interest_sectl"]/div[1]/div[2]/div/div[2]/a/span')
+    rating = int(ele.text)
+    print(u"评价人数=%s" % rating)
     
     ele = browser.find_element_by_xpath('//*[@id="content"]/h1/span[1]')
     name = ele.text
@@ -123,8 +129,9 @@ def subject(dbId):
     elem = browser.find_elements_by_xpath('//*[contains(@class, "tags-body")]/a')
     for ele in elem:
         if ele.text:
-            tags = tags + ele.text + " / "
-    
+            val = ele.text.strip()
+            tags = tags + val + " / "
+            l_tags.append(val)
     
     sql = u"insert into db_movies \
     (`id`, `name`, `en_name`, `my_year`, `score`, `director`, `writer`, `actor`, `my_type`, `area`, `langauge`, `release_time`, `length`, `other_name`, `imdb`, `tags`) \
@@ -144,16 +151,45 @@ def subject(dbId):
     `length`=values(`length`),\
     `other_name`=values(`other_name`),\
     `imdb`=values(`imdb`),\
-    `tags`=values(`tags`) " % (id, name, en_name, my_year, score, director, writer, actor, my_type, area, langauge, release_time, length, other_name, imdb, tags)
+    `tags`=values(`tags`) " % (id, name, en_name, my_year, score, director, writer, \
+    actor, my_type, area, langauge, release_time, length, other_name, imdb, tags)
 
+    # # 使用cursor()方法获取操作游标
+    # cursor = db.cursor()
+    # # 执行sql语句
+    # cursor.execute(sql)
+    # # 提交到数据库执行
+    # db.commit()
+    print(sql)
+    
+    l_area = []
+    l_area2 = area.split('/')
+    for val in l_area2:
+        l_area.append(val.strip())
+    
+    dict["id"] = id
+    dict["name"] = name
+    dict["en_name"] = en_name
+    dict["my_year"] = my_year
+    dict["score"] = score
+    dict["rating"] = rating
+    dict["director"] = director
+    dict["writer"] = writer
+    dict["actor"] = actor
+    dict["my_type"] = my_type
+    # dict["l_my_type"] = l_my_type
+    dict["area"] = area
+    dict["l_area"] = l_area
+    dict["langauge"] = langauge
+    dict["release_time"] = release_time
+    dict["length"] = length
+    dict["other_name"] = other_name
+    dict["imdb"] = imdb
+    dict["tags"] = tags
+    dict["l_tags"] = l_tags
+    list.append(dict)
 
-    # 使用cursor()方法获取操作游标
-    cursor = db.cursor()
-    # 执行sql语句
-    cursor.execute(sql)
-    # 提交到数据库执行
-    db.commit()
-
+list = []
 ids = [
 27615441, # 网络迷踪
 3878007, # 海王
@@ -176,10 +212,27 @@ ids = [
 20435622, # 环太平洋：雷霆再起
 6390825, # 黑豹
 26611804] # 三块广告牌
-# ids = [26611804]
+# ids = [6390825, 26611804]
 for dbId in ids:
-    subject(dbId)
+    subject(dbId, list)
+
+print("list len = %s" % len(list))
+
+totol = 0
+dict_tag = {}
+for item in list:
+    dict_tag[item["name"]] = int(item["rating"])
+    totol = totol + int(item["rating"])
+#    for tag in item["l_area"]:
+#       if tag in dict_tag:
+#           dict_tag[tag] = dict_tag[tag] + 1
+#       else:
+#           dict_tag[tag] = 1
 
 
-# 关闭数据库连接
-db.close()
+for key, val in sorted(dict_tag.items(), key=lambda item:item[1]):
+    print("%s = %s" % (key, val))
+print("totol = %s" % totol)
+print("average = %s" % totol / 21)
+# # 关闭数据库连接
+# db.close()
