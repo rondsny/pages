@@ -10,6 +10,12 @@ browser = webdriver.Chrome()
 # # 打开数据库连接
 # db = MySQLdb.connect("localhost", "root", "123456", "mov", charset='utf8' )
 
+def str2lst(msg):
+    lst = []
+    for val in msg.split('/'):
+        lst.append(val.strip())
+    return lst
+
 """
 CREATE TABLE db_movies
 (
@@ -71,28 +77,19 @@ def subject(dbId, list):
     for ele in elem:
         print(ele.text)
 
-    # 主演
-    print(u'\n主演:')
-    elem = browser.find_elements_by_xpath('//*[@id="info"]/span[3]/span[2]/span[*]/a')
-    for ele in elem:
-        if ele.text:
-            actor = actor + ele.text + " / "
-            
     # 其它
     infos = browser.find_element_by_xpath('//*[@id="info"]')
     lines = infos.text.split('\n')
     for line in lines:
         # print(line.encode("GBK", 'ignore'))
-
         items = line.split(":")
-
         title = items[0].strip()
         cont  = items[1].strip()
         conts = cont.split("/")
         if title == u"编剧":
             writer = cont
-        # elif title == u"主演":
-        #     actor = cont
+        elif title == u"主演":
+            actor = cont
         elif title == u"类型":
             my_type = cont
         elif title == u"制片国家/地区":
@@ -109,7 +106,7 @@ def subject(dbId, list):
             imdb = cont
 
     ele = browser.find_element_by_xpath('//*[@id="interest_sectl"]/div[1]/div[2]/strong')
-    score = int(ele.text)
+    score = float(ele.text)
     print(u"分数=%s" % score)
     
     ele = browser.find_element_by_xpath('//*[@id="interest_sectl"]/div[1]/div[2]/div/div[2]/a/span')
@@ -134,7 +131,8 @@ def subject(dbId, list):
             l_tags.append(val)
     
     sql = u"insert into db_movies \
-    (`id`, `name`, `en_name`, `my_year`, `score`, `director`, `writer`, `actor`, `my_type`, `area`, `langauge`, `release_time`, `length`, `other_name`, `imdb`, `tags`) \
+    (`id`, `name`, `en_name`, `my_year`, `score`, `director`, `writer`, `actor`, `my_type`, `area`, `langauge`, \
+    `release_time`, `length`, `other_name`, `imdb`, `tags`) \
     values (%s,'%s','%s',%d,%s,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s') on duplicate key update \
     `id`=values(`id`),\
     `name`=values(`name`),\
@@ -160,13 +158,8 @@ def subject(dbId, list):
     # cursor.execute(sql)
     # # 提交到数据库执行
     # db.commit()
-    print(sql)
-    
-    l_area = []
-    l_area2 = area.split('/')
-    for val in l_area2:
-        l_area.append(val.strip())
-    
+    # print(sql)
+
     dict["id"] = id
     dict["name"] = name
     dict["en_name"] = en_name
@@ -174,12 +167,16 @@ def subject(dbId, list):
     dict["score"] = score
     dict["rating"] = rating
     dict["director"] = director
+    
     dict["writer"] = writer
     dict["actor"] = actor
     dict["my_type"] = my_type
-    # dict["l_my_type"] = l_my_type
     dict["area"] = area
-    dict["l_area"] = l_area
+    dict["l_writer"] = str2lst(writer)
+    dict["l_actor"] = str2lst(actor)
+    dict["l_my_type"] = str2lst(my_type)
+    dict["l_area"] = str2lst(area)
+    
     dict["langauge"] = langauge
     dict["release_time"] = release_time
     dict["length"] = length
@@ -212,27 +209,45 @@ ids = [
 20435622, # 环太平洋：雷霆再起
 6390825, # 黑豹
 26611804] # 三块广告牌
+
 # ids = [6390825, 26611804]
+
 for dbId in ids:
     subject(dbId, list)
-
 print("list len = %s" % len(list))
 
-totol = 0
-dict_tag = {}
-for item in list:
-    dict_tag[item["name"]] = int(item["rating"])
-    totol = totol + int(item["rating"])
-#    for tag in item["l_area"]:
-#       if tag in dict_tag:
-#           dict_tag[tag] = dict_tag[tag] + 1
-#       else:
-#           dict_tag[tag] = 1
+def printByNumber(list, key1, key2):
+    totol = 0
+    dict_tag = {}
+    for item in list:
+        dict_tag[item[key1]] = float(item[key2])
+        totol = totol + float(item[key2])
+
+    for key, val in sorted(dict_tag.items(), key=lambda item:item[1]):
+        print("(%s) %s = (%s) %s" % (key1, key, key2, val))
+    print("totol = %s" % totol)
+    print("")
 
 
-for key, val in sorted(dict_tag.items(), key=lambda item:item[1]):
-    print("%s = %s" % (key, val))
-print("totol = %s" % totol)
-print("average = %s" % totol / 21)
+def printByCounter(list, key1):
+    dict_tag = {}
+    for item in list:
+       for tag in item[key1]:
+          if tag in dict_tag:
+              dict_tag[tag] = dict_tag[tag] + 1
+          else:
+              dict_tag[tag] = 1
+
+    for key, val in sorted(dict_tag.items(), key=lambda item:item[1]):
+        print("(%s) %s = %s" % (key1, key, val))
+    print("")
+
+
+printByNumber(list, 'name', 'rating')
+printByNumber(list, 'name', 'score')
+printByCounter(list, 'l_area')
+printByCounter(list, 'l_tags')
+printByCounter(list, 'l_my_type')
+
 # # 关闭数据库连接
 # db.close()
