@@ -1,6 +1,9 @@
 ### 豆瓣评分最高的三部电源
 
-![我不是药神](https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2519070834.webp)![小偷家族](https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2530599636.webp)![头号玩家](https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2516578307.webp)![三块广告牌](https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2510081688.webp)
+![我不是药神](https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2519070834.webp)
+![小偷家族](https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2530599636.webp)
+![头号玩家](https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2516578307.webp)
+![三块广告牌](https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2510081688.webp)
 
 
 
